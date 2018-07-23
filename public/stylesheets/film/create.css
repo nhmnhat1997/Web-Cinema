@@ -1,0 +1,71 @@
+.my-title-film {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.my-create-film {
+    margin-bottom: 100px;
+    color: black;
+}
+
+.my-upload-image img {
+    width: 95%;
+    height: 320px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+    /* object-fit: cover; */
+}
+
+@media screen and (min-width:768px) and (max-width: 991px) {
+    .my-upload-image img {
+        width: 70%;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .my-upload-image img {
+        width: 70%;
+    }
+}
+
+.my-upload-image img:hover {
+    opacity: 1;
+    transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+}
+
+.my-btn {
+    font-size: 1.1em;
+    border-radius: 10px;
+    padding: 8px 20px;
+    background: rgb(128,0,0)
+}
+
+.my-btn:hover {
+    transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+}
+
+.my-bot-form {
+    padding-top: 50px;
+}
+
+.my-input-film {
+    margin-top: 3px;
+    margin-bottom: 20px;
+}
+
+.my-form-film .form-group h4 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.my-select-film {
+    padding: 6px 10px;
+}

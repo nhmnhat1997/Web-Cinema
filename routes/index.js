@@ -9,6 +9,10 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' })
 })
 
+router.get('/phim/tao-phim', function (req, res, next) {
+  res.render('cinema/create', { title: 'Express' })
+})
+
 router.get('/users', function (req, res, next) {
   res.send('respond with a resource')
 })

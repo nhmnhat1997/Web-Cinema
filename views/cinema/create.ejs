@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Tạo phim mới
+</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<!--body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to
+    <%= title %>
+  </p>
+
+  <div class="container">
+    <div class="col-md-6 col-sm-12" style="height: 100px;background: orange"></div>
+    <div class="col-md-6 col-sm-12" style="height: 100px;background: blue"></div>
+
+  </div>
+
+
+  <a href="/users">User</a>
+  <a href="/signin">Sign In</a>
+</body-->
+
+<body id="page-top" ng-controller="mainController">
+
+  <!-- HEADER PAGE  -->
+  <div class="my-header-page">
+      <div class="my-top-header-text">
+          <h1> Cinema Website </h1>
+      </div>
+  </div>
+
+  <!-- LOADER  -->
+  <div class="loader"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar navbar-default navbar-custom">
+      <div class="container my-containter-full">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <i class="fa fa-bars"></i>
+              </button>
+              <a class="navbar-brand" href="/">
+                  <i class="fa fa-home" aria-hidden="true"></i>
+              </a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/phim/tao-phim" ng-cloak>
+                                <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim</a>
+                        </li>
+                </ul>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Insert BODY in other page  -->
+  <div>
+  </div>
+
+<link rel="stylesheet" href="/stylesheets/film/create.css">
+<script src="/javascripts/film/create.js"></script>
+
+<div ng-controller="createController" ng-show="completeLoading">
+
+  <div class="container my-container-center my-title-header">
+      <h1> Tạo phim mới </h1>
+  </div>
+
+  <div class="container my-create-film">
+      <form role="form">
+          <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
+              <a href="" ng-click="clickUploadImage()">
+                  <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+              </a>
+              <input type="file" style="display:none" id="fileInput" name="fileInput" accept="image/*" onchange="readURL(this)">
+
+              <button type="button" class="btn btn-primary my-btn text-center" ng-click="clickUploadImage()">
+                  <i class="fa fa-file-image-o fa-lg" aria-hidden="true"></i>
+                  Chọn hình minh họa
+              </button>
+          </div>
+
+          <div class="container col-sm-12 col-md-7 my-form-film animated flipInX">
+              <div class="form-group">
+                  <h4>Tên bộ phim:</h4>
+                  <input class="form-control my-input-film" type="text" id="filmName" ng-model="filmName">
+              </div>
+
+              <div class="form-group">
+                  <h4>Thể loại phim:</h4>
+                  <select ng-options="genre for genre in listGenreFilms" ng-model="filmGenre" class="my-input-film col-md-12 col-sm-12 col-lg-12 col-xs-12 my-select-film"
+                      id="filmGenre">
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <h4> Thời gian phát hành: </h4>
+                  <select ng-options="month for month in listMonth" ng-model="filmMonth" class="my-input-film my-select-film col-lg-5 col-md-5 col-sm-5 col-xs-5"
+                      id="filmMonth"></select>
+
+                  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  </div>
+
+                  <select ng-options="year for year in listYear" ng-model="filmYear" class="my-input-film col-md-5 col-sm-5 col-lg-5 col-xs-5 my-select-film"
+                      id="filmYear"></select>
+              </div>
+
+              <div class="form-group">
+                  <h4> Nội dung mô tả:</h4>
+                  <textarea class="form-control col-sm-12 col-md-12 my-input-film" id="filmContent" rows="5" placeholder="Điền thông tin thêm về bộ phim, như diễn viên chính, nội dung bộ phim,..."
+                      ng-model="filmContent"></textarea>
+              </div>
+          </div>
+
+          <div class="container my-container-center my-bot-form">
+              <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickUploadFilm()" style="margin-right:15px">
+                  <i class="fa fa-upload fa-lg" aria-hidden="true"></i>
+                  Tạo phim
+          </button>
+          </div>
+      </form>
+
+      <!-- FOOTER  -->
+      <footer class="text-center my-footer" style="display:none">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12">
+                      Copyright &copy; Cinema Website 2018
+                  </div>
+              </div>
+          </div>
+      </footer>
+
+</body>
+
+</html>
+
+</html>
