@@ -3,8 +3,13 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+const mongoose = require('mongoose')
+// mongoose.connect('mongodb://localhost/cinema')
+mongoose.connect('mongodb://admin:abc123@ds247171.mlab.com:47171/web-cinema-training', {
+  useNewUrlParser: true
+})
 
-var indexRouter = require('./routes/index')
+require('./models/User')
 
 var app = express()
 
@@ -18,6 +23,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+var indexRouter = require('./routes/index')
 app.use('/', indexRouter)
 
 // catch 404 and forward to error handler
