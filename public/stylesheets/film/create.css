@@ -69,3 +69,7 @@
 .my-select-film {
     padding: 6px 10px;
 }
+
+.disabled{
+    background: white !important 
+}

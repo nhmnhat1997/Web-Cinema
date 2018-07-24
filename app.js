@@ -4,6 +4,8 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 const mongoose = require('mongoose')
+var engine = require('ejs-locals')
+
 // mongoose.connect('mongodb://localhost/cinema')
 mongoose.connect('mongodb://admin:abc123@ds247171.mlab.com:47171/web-cinema-training', {
   useNewUrlParser: true
@@ -16,6 +18,7 @@ var app = express()
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+app.engine('ejs',engine)
 
 app.use(logger('dev'))
 app.use(express.json())
