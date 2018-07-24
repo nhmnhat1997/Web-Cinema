@@ -14,6 +14,11 @@ router.get('/', function (req, res, next) {
 router.get('/phim/tao-phim', function (req, res, next) {
   res.render('cinema/create', { title: 'Tạo phim' })
 })
+
+router.get('/dangky', function (req, res, next) {
+  res.render('cinema/signup', { title: 'Đăng ký' })
+})
+
 router.get('/phim/:id', async function (req, res, next) {
   try {
     console.log(req.params)
