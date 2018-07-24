@@ -1,26 +1,37 @@
 var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
-const User = mongoose.model('User')
-
-let user = [{name: 'Nhat', id: '123456'}]
-
-router.get('/', function (req, res, next) {
-  res.send(user)
-})
+const Film = mongoose.model('Film')
 
 router.post('/', async function (req, res, next) {
   try {
-    user.push(req.body)
-    let newUser = new User({
+    let newFilm = new Film({
       name: req.body.name,
-      email: req.body.email
+      genre: req.body.genre,
+      releaseDate: req.body.releaseDate,
+      content: req.body.content
     })
-    await newUser.save()
+    console.log(newFilm)
+    await newFilm.save()
     res.send({status: 200, message: 'Success'})
   } catch (error) {
     res.send({status: 500, messaeg: 'Error'})
   }
 })
 
+router.get('/', async function (req, res, next) {
+  try {
+    let newFilm = new Film({
+      name: req.body.name,
+      genre: req.body.genre,
+      releaseDate: req.body.releaseDate,
+      content: req.body.content
+    })
+    console.log(newFilm)
+    await newFilm.save()
+    res.send({status: 200, message: 'Success'})
+  } catch (error) {
+    res.send({status: 500, messaeg: 'Error'})
+  }
+})
 module.exports = router

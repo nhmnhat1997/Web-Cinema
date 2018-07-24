@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-var UserSchema = new Schema({ // TODO: chuyenCan cho nhan vien
+var UserSchema = new Schema({
   name: {
     type: String,
     default: ''

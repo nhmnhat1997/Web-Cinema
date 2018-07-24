@@ -9,7 +9,7 @@ mongoose.connect('mongodb://admin:abc123@ds247171.mlab.com:47171/web-cinema-trai
   useNewUrlParser: true
 })
 
-require('./models/User')
+require('./models/Film')
 
 var app = express()
 
