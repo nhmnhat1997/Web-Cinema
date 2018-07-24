@@ -1,4 +1,5 @@
 <%- layout('./share/layout') %>
+<link rel="stylesheet" href="/stylesheets/film/list.css">
     <div class="my-header-page">
         <div class="my-top-header-text">
             <h1> Cinema Website </h1>
@@ -31,7 +32,25 @@
         </div>
     </nav>
 
+    <div ng-controller="showListController">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: -createdDate">
+            <!--a ng-href="{{urlFilm(film)}}"-->
+                <img src="../images/image.jpeg" class="img-responsive" alt="">
+                <div class="detail">
+                    <h2 class="name-film"> {{film.name}} ({{ film.releaseDate | date: 'dd/MM/yyyy' }}) </h2>
+                    <hr class="hr-film">
+                    <p class="content-film">
+                        <span class="my-text-bold"> Thể loại: </span>{{film.genre}} </p>
+                    <p class="content-film" ng-init="content=minContentFilm(film)">
+                        <span class="my-text-bold"> Nội dung: </span> {{film.content}} </p>
+                </div>
+            </a>
+        </div>
+    
+    </div>
+
     <div>
     </div>
+    <script src="/javascripts/film/showListFilm.js"></script>
 
    

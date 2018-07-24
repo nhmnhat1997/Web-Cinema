@@ -1,0 +1,102 @@
+.my-portfolio {
+    justify-content: center;
+    margin-top: 100px;
+    width: 98%;
+}
+
+.my-portfolio-item {
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    position: relative;
+    padding: 0px 15px;
+    justify-content: center;
+}
+
+.my-portfolio-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.detail {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0px 15px;
+}
+
+.name-film {
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    font-family: 'Paytone One', sans-serif;
+}
+
+.content-film {
+    font-size: 1em;
+    font-weight: normal;
+    visibility: hidden;
+    padding-top: 5px;
+    word-wrap: break-word;
+}
+
+.hr-film {
+    padding: 0px;
+    margin: 0px;
+    visibility: hidden;
+}
+
+.detail:hover {
+    height: 100%;
+    background-color: rgba(130, 0, 0, 0.9);
+    transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+}
+
+.detail:hover>.content-film,
+.detail:hover>.hr-film {
+    visibility: visible;
+}
+
+@media screen and (max-width: 991px) {
+    .my-portfolio-item {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .my-portfolio {
+        width: 85%;
+    }
+    .my-portfolio-item {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .my-portfolio {
+        width: 100%;
+    }
+    .my-portfolio-item {
+        height: 300px;
+    }
+}
+
+
+/* ----------   NO SEARCH FILM ------------  */
+
+.my-result-search h1 {
+    color: rgb(130, 0, 0);
+    margin-bottom: 50px;
+}
+
+.my-result-search h4 {
+    margin-bottom: 110px;
+    line-height: 2;
+}

@@ -6,11 +6,11 @@ router.use('/api/cinema', cinema)
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' })
+  res.render('index', { title: 'Trang chủ' })
 })
 
 router.get('/phim/tao-phim', function (req, res, next) {
-  res.render('cinema/create', { title: 'Express' })
+  res.render('cinema/create', { title: 'Tạo phim' })
 })
 
 router.get('/users', function (req, res, next) {
