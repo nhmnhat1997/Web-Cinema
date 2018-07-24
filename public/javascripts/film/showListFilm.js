@@ -4,7 +4,7 @@
     apiService.getFilms()
       .then(function (response) {
         console.log(response)
-        $scope.listFilms = response.data.film
+        $scope.listFilms = response.data.films
       })
   }])
 })()

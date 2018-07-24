@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <%- layout('../share/layout') %>
 
-<style>
-    input:read-only{
-        background-color: white
-    }
-</style>
+    <style>
+        input:read-only {
+            background-color: white
+        }
+    </style>
 
-<link rel="stylesheet" href="/stylesheets/film/create.css">
+    <link rel="stylesheet" href="/stylesheets/film/create.css">
     <div class="my-header-page">
         <div class="my-top-header-text">
             <h1> Cinema Website </h1>
@@ -38,7 +38,24 @@
 
 
 
+
     <div ng-controller="createController">
+
+        <div class="modal" tabindex="-1" role="dialog" id="SuccessDialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tạo phim thành công.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="goBackHome()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="container my-container-center my-title-header">
             <h1> Tạo phim mới </h1>
@@ -90,7 +107,7 @@
                     </button>
                 </div>
             </form>
-    
+
         </div>
     </div>
     <script src="/javascripts/film/createFilm.js"></script>

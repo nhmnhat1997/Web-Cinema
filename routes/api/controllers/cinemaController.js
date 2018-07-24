@@ -21,7 +21,17 @@ async function createFilm (req, res, next) {
 async function getFilms (req, res, next) {
   try {
     let films = await Film.find()
-    res.send({ film: films })
+    res.send({ films: films })
+  } catch (error) {
+    console.log(error)
+    res.send({ status: 500, message: 'Error' })
+  }
+}
+
+async function getFilm (req, res, next) {
+  try {
+    let film = await Film.findById(req.params.id)
+    res.send({ film: film })
   } catch (error) {
     console.log(error)
     res.send({ status: 500, message: 'Error' })
@@ -30,5 +40,6 @@ async function getFilms (req, res, next) {
 
 module.exports = {
   createFilm: createFilm,
-  getFilms: getFilms
+  getFilms: getFilms,
+  getFilm: getFilm
 }

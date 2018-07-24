@@ -19,6 +19,10 @@
       $('#imageFilm').css('opacity', 1)
     }, false)
 
+    $scope.goBackHome = function () {
+      window.location.href = '/'
+    }
+
     $scope.clickUploadImage = function () {
       document.getElementById('fileInput').click()
     }
@@ -38,6 +42,9 @@
       apiService.createFilm(data)
         .then(function (response) {
           console.log(response.message)
+          if (response.status == 200) {
+            document.getElementById('SuccessDialog').style.display = 'block'
+          }
         })
     }
   }])
