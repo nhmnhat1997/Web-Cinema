@@ -17,6 +17,10 @@ var FilmSchema = new Schema({ // TODO: chuyenCan cho nhan vien
   content: {
     type: String,
     default: ''
+  },
+  createdDate: {
+    type: Number,
+    default: 0
   }
 }, { usePushEach: true })
 
