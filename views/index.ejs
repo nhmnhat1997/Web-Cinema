@@ -34,7 +34,7 @@
 
     <div ng-controller="showListController">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
-            <!--a ng-href="{{urlFilm(film)}}"-->
+            <a ng-href="/phim/{{film._id}}">
                 <img src="../images/image.jpeg" class="img-responsive" alt="">
                 <div class="detail">
                     <h2 class="name-film"> {{film.name}} ({{ film.releaseDate | date: 'dd/MM/yyyy' }}) </h2>

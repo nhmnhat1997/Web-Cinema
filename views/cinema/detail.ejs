@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<%- layout('../share/layout') %>
+
+    <style>
+        input:read-only {
+            background-color: white
+        }
+    </style>
+
+    <link rel="stylesheet" href="/stylesheets/film/create.css">
+    <div class="my-header-page">
+        <div class="my-top-header-text">
+            <h1> Cinema Website </h1>
+        </div>
+    </div>
+
+    <div class="loader"></div>
+
+    <nav class="navbar navbar-default navbar-custom">
+        <div class="container my-containter-full">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/phim/tao-phim" ng-cloak>
+                                    <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
+                            </li>
+                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+    </div>
+
+
+
+
+
+    <div ng-controller="detailController">
+        <p class="hide" id="film-id"><%= filmId %></p>
+        <div class="container my-container-center my-title-header">
+            <h1> Chi tiết phim </h1>
+        </div>
+
+        <div class="container my-create-film">
+            <form role="form">
+                <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
+                        <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+                </div>
+
+                <div class="container col-sm-12 col-md-7 my-form-film animated flipInX" >
+                    <div class="form-group">
+                        <h4>Tên bộ phim:</h4>
+                        <p id="filmName">{{ film.name }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Thể loại phim:</h4>
+                        <p id="filmGenre">{{ film.genre }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <h4> Thời gian phát hành: </h4>
+                        <p id="releaseDate">{{ film.releaseDate | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <h4> Nội dung mô tả:</h4>
+                        <p id="content">{{ film.content }}</p>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script src="/javascripts/film/detail.js"></script>

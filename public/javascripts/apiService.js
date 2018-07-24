@@ -8,6 +8,9 @@ angular.module('Cinema-Web', []).factory('apiService', ['$http', function ($http
     },
     getFilms: function () {
       return $http.get('/api/cinema')
+    },
+    getFilm: function (id) {
+      return $http.get('/api/cinema/' + id)
     }
   }
 }])
