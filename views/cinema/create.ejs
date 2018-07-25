@@ -16,7 +16,7 @@
 
     <div class="loader"></div>
 
-    <nav class="navbar navbar-default navbar-custom">
+    <nav class="navbar navbar-default navbar-custom" ng-controller="createController">
         <div class="container my-containter-full">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -28,6 +28,12 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                            <li  ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
+                                <a>
+                                <i class="fa fa-power-off fa-lg" aria-hidden="true"></i> Đăng xuất </a>
+                            </li>
+                        </ul>
             </div>
         </div>
     </nav>
@@ -40,7 +46,7 @@
 
 
     <div ng-controller="createController">
-
+        <p class="hide" id="user-id"><%= userId %></p>
         <div class="modal" tabindex="-1" role="dialog" id="SuccessDialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

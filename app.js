@@ -3,7 +3,9 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+var session = require('express-session')
 const mongoose = require('mongoose')
+const config = require('./configs/config')
 var engine = require('ejs-locals')
 
 // mongoose.connect('mongodb://localhost/cinema')
@@ -26,6 +28,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+  secure: true,
+  httpOnly: true,
+  secret: config.secret,
+  resave: false,
+  saveUninitialized: true
+}))
 require('./configs/passport').createPassportConfig(app)
 
 var indexRouter = require('./routes/index')

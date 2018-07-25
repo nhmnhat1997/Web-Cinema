@@ -24,10 +24,6 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/phim/tao-phim" ng-cloak>
-                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                    </li>
-                    <li>
                         <a href="/dangky" ng-cloak>
                             <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
                     </li>
@@ -43,7 +39,7 @@
 
 
 
-    <div ng-controller="signupController">
+    <div ng-controller="signinController">
 
         <div class="modal" tabindex="-1" role="dialog" id="ErrorDialog">
             <div class="modal-dialog" role="document">
@@ -67,7 +63,7 @@
 
         <div class="container my-create-film">
             <form role="form">
-                <div class="container my-form-signup animated flipInX">
+                <div class="col-md-4 col-md-offset-4 my-form-signup animated flipInX">
 
                     <div class="form-group">
                         <h4>Email:</h4>
@@ -81,7 +77,7 @@
                 </div>
 
                 <div class="container my-container-center my-bot-form">
-                    <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" style="margin-right:15px" ng-click="clickSignUp()">
+                    <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" style="margin-right:15px" ng-click="clickSignIn()">
                         <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
                         Đăng nhập
                     </button>
@@ -90,4 +86,4 @@
 
         </div>
     </div>
-    <script src="/javascripts/film/signup.js"></script>
+    <script src="/javascripts/film/signin.js"></script>

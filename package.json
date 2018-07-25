@@ -12,6 +12,7 @@
     "ejs": "1.0.0",
     "ejs-locals": "^1.0.2",
     "express": "~4.16.0",
+    "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "~8.3.0",
     "mongodb": "~3.1.1",

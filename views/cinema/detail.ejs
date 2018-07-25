@@ -8,15 +8,15 @@
     </style>
 
     <link rel="stylesheet" href="/stylesheets/film/create.css">
+    <link rel="stylesheet" href="/stylesheets/loader.css">
     <div class="my-header-page">
         <div class="my-top-header-text">
             <h1> Cinema Website </h1>
         </div>
     </div>
 
-    <div class="loader"></div>
 
-    <nav class="navbar navbar-default navbar-custom">
+    <nav class="navbar navbar-default navbar-custom" ng-controller="detailController">
         <div class="container my-containter-full">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -28,12 +28,24 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/phim/tao-phim" ng-cloak>
-                                    <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                            </li>
-                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show="user._id" ng-cloak>
+                        <a href="/phim/tao-phim" >
+                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
+                    </li>
+                    <li ng-show="!user._id" ng-cloak>
+                        <a href="/dangky" >
+                            <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
+                    </li>
+                    <li ng-show="!user._id" ng-cloak>
+                        <a href="/dangnhap">
+                            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
+                    </li>
+                    <li  ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
+                        <a>
+                        <i class="fa fa-power-off fa-lg" aria-hidden="true"></i> Đăng xuất </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -47,6 +59,7 @@
 
     <div ng-controller="detailController">
         <p class="hide" id="film-id"><%= filmId %></p>
+        <p class="hide" id="user-id"><%= userId %></p>
         <div class="container my-container-center my-title-header">
             <h1> Chi tiết phim </h1>
         </div>
@@ -54,10 +67,10 @@
         <div class="container my-create-film">
             <form role="form">
                 <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
-                        <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+                    <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
                 </div>
 
-                <div class="container col-sm-12 col-md-7 my-form-film animated flipInX" >
+                <div class="container col-sm-12 col-md-7 my-form-film animated flipInX">
                     <div class="form-group">
                         <h4>Tên bộ phim:</h4>
                         <p id="filmName">{{ film.name }}</p>

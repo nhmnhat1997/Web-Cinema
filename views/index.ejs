@@ -8,7 +8,7 @@
 
     <div class="loader"></div>
 
-    <nav class="navbar navbar-default navbar-custom">
+    <nav class="navbar navbar-default navbar-custom" ng-controller="showListController">
         <div class="container my-containter-full">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -23,18 +23,22 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/phim/tao-phim" ng-cloak>
-                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                    </li>
-                    <li>
-                        <a href="/dangky" ng-cloak>
-                            <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
-                    </li>
-                    <li>
-                        <a href="/dangnhap" ng-cloak>
-                            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
-                    </li>
+                        <li ng-show="user._id" ng-cloak>
+                            <a href="/phim/tao-phim" >
+                                <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
+                        </li>
+                        <li ng-show="!user._id" ng-cloak>
+                            <a href="/dangky" >
+                                <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
+                        </li>
+                        <li ng-show="!user._id" ng-cloak>
+                            <a href="/dangnhap">
+                                <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
+                        </li>
+                        <li ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
+                            <a>
+                                <i class="fa fa-power-off fa-lg" aria-hidden="true"></i> Đăng xuất</a>
+                        </li>
                 </ul>
 
             </div>
@@ -42,6 +46,7 @@
     </nav>
 
     <div ng-controller="showListController">
+        <p class="hide" id="user-id"><%= userId %></p>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
             <a ng-href="/phim/{{film._id}}">
                 <img src="../images/image.jpeg" class="img-responsive" alt="">

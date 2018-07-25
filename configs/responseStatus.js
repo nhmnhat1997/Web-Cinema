@@ -86,5 +86,6 @@ module.exports = {
   SIGN_IN_SUCCESS: 'Đăng nhập thành thông',
   SIGN_OUT_SUCCESS: 'Đăng xuất thành công',
   EMAIL_REQUIRED: 'Email không được để trống',
-  EMAIL_FORMAT: 'Email không đúng định dạng'
+  EMAIL_FORMAT: 'Email không đúng định dạng',
+  WRONG_EMAIL_OR_PASSWORD: 'Sai tài khoản hoặc mật khẩu'
 }
