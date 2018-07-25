@@ -11,6 +11,9 @@ angular.module('Cinema-Web', []).factory('apiService', ['$http', function ($http
     },
     getFilm: function (id) {
       return $http.get('/api/cinema/' + id)
+    },
+    signup: function (data) {
+      return $http.post('/api/cinema/signup', data)
     }
   }
 }])

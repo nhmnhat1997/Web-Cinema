@@ -1,10 +1,12 @@
 var express = require('express')
 var router = express.Router()
 var cinema = require('./api/routes/cinema')
+var authentication = require('./api/routes/authentication')
 var mongoose = require('mongoose')
 const Film = mongoose.model('Film')
 
 router.use('/api/cinema', cinema)
+router.use('/api/cinema', authentication)
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

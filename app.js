@@ -12,19 +12,21 @@ mongoose.connect('mongodb://admin:abc123@ds247171.mlab.com:47171/web-cinema-trai
 })
 
 require('./models/Film')
+require('./models/User')
 
 var app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.engine('ejs',engine)
+app.engine('ejs', engine)
 
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+require('./configs/passport').createPassportConfig(app)
 
 var indexRouter = require('./routes/index')
 app.use('/', indexRouter)
