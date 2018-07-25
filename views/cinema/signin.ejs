@@ -22,16 +22,16 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/phim/tao-phim" ng-cloak>
-                                    <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                            </li>
-                            <li>
-                                <a href="/dangnhap" ng-cloak>
-                                    <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
-                            </li>
-                        </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/phim/tao-phim" ng-cloak>
+                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
+                    </li>
+                    <li>
+                        <a href="/dangky" ng-cloak>
+                            <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -44,22 +44,6 @@
 
 
     <div ng-controller="signupController">
-
-        <div class="modal" tabindex="-1" role="dialog" id="SuccessDialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thông báo</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>Đăng ký thành công.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="goBackHome()">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal" tabindex="-1" role="dialog" id="ErrorDialog">
             <div class="modal-dialog" role="document">
@@ -78,16 +62,12 @@
         </div>
 
         <div class="container my-container-center my-title-header">
-            <h1> Đăng ký </h1>
+            <h1> Đăng nhập </h1>
         </div>
 
         <div class="container my-create-film">
             <form role="form">
                 <div class="container my-form-signup animated flipInX">
-                    <div class="form-group">
-                        <h4>Tên người dùng:</h4>
-                        <input class="form-control my-input-film" type="text" id="userName" ng-model="userName" placeholder="Tên người dùng">
-                    </div>
 
                     <div class="form-group">
                         <h4>Email:</h4>
@@ -98,17 +78,12 @@
                         <h4> Mật khẩu: </h4>
                         <input type="password" class="form-control my-input-film" id="password" ng-model="password" placeholder="Mật khẩu">
                     </div>
-
-                    <div class="form-group">
-                        <h4> Nhập lại mật khẩu:</h4>
-                        <input type="password" class="form-control my-input-film" id="reEnterPassword" ng-model="reEnterPassword" placeholder="Nhập lại mật khẩu">
-                    </div>
                 </div>
 
                 <div class="container my-container-center my-bot-form">
                     <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" style="margin-right:15px" ng-click="clickSignUp()">
-                        <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>
-                        Tạo tài khoản
+                        <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+                        Đăng nhập
                     </button>
                 </div>
             </form>

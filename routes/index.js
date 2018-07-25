@@ -21,6 +21,10 @@ router.get('/dangky', function (req, res, next) {
   res.render('cinema/signup', { title: 'Đăng ký' })
 })
 
+router.get('/dangnhap', function (req, res, next) {
+  res.render('cinema/signin', { title: 'Đăng nhập' })
+})
+
 router.get('/phim/:id', async function (req, res, next) {
   try {
     console.log(req.params)

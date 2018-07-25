@@ -1,5 +1,5 @@
 <%- layout('./share/layout') %>
-<link rel="stylesheet" href="/stylesheets/film/list.css">
+    <link rel="stylesheet" href="/stylesheets/film/list.css">
     <div class="my-header-page">
         <div class="my-top-header-text">
             <h1> Cinema Website </h1>
@@ -22,23 +22,27 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/phim/tao-phim" ng-cloak>
-                                    <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                            </li>
-                            <li>
-                                    <a href="/dangky" ng-cloak>
-                                        <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
-                                </li>
-                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/phim/tao-phim" ng-cloak>
+                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
+                    </li>
+                    <li>
+                        <a href="/dangky" ng-cloak>
+                            <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
+                    </li>
+                    <li>
+                        <a href="/dangnhap" ng-cloak>
+                            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
+                    </li>
+                </ul>
 
             </div>
         </div>
     </nav>
 
     <div ng-controller="showListController">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
             <a ng-href="/phim/{{film._id}}">
                 <img src="../images/image.jpeg" class="img-responsive" alt="">
                 <div class="detail">
@@ -51,11 +55,9 @@
                 </div>
             </a>
         </div>
-    
+
     </div>
 
     <div>
     </div>
     <script src="/javascripts/film/showListFilm.js"></script>
-
-   
