@@ -49,11 +49,19 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
   }
 
   $scope.clickSignOut = function () {
+    document.getElementById('LogoutDialog').style.display = 'block'
+  }
+
+  $scope.goSignOut = function () {
     apiService.signout()
       .then(function (response) {
         console.log(response.data)
         window.location.href = '/'
       })
+  }
+
+  $scope.cancelDialog = function () {
+    document.getElementById('LogoutDialog').style.display = 'none'
   }
 
   $scope.goBackHome = function () {
@@ -102,6 +110,14 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
       contentType: false,
       success: function (data) {
         console.log(data)
+        if (filmId) {
+          $scope.notiMessage = 'Sửa phim thành công'
+          document.getElementById('SuccessDialog').style.display = 'block'
+        } else {
+          $scope.notiMessage = 'Tạo phim thành công'
+          document.getElementById('SuccessDialog').style.display = 'block'
+        }
+        $scope.$apply()
       },
       error: function (err) {
         err && console.log(err)

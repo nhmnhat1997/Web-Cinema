@@ -31,7 +31,7 @@
                     <ul class="nav navbar-nav nav-left">
                             <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
                                 <a href="/user/{{user._id}}">
-                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> Thông tin người dùng</a>
+                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> {{user.name}}</a>
                             </li>
                         </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -70,6 +70,23 @@
             </div>
         </div>
 
+        <div class="modal" tabindex="-1" role="dialog" id="LogoutDialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thông báo</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn đăng xuất ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="goSignOut()">OK</button>
+                            <button type="button" class="btn btn-primary" ng-click="cancelDialog()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <div class="container my-container-center my-title-header">
             <h1> {{ formTitle }} </h1>
         </div>
@@ -78,7 +95,7 @@
             <form role="form">
                 <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
                     <a href="" ng-click="clickUploadImage()">
-                        <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+                        <img id="imageFilm" name="imageFilm" ng-src="{{ film.posterURL || '/images/image.jpeg' }}">
                     </a>
                     <input type="file" style="display:none" id="fileInput" name="fileInput" accept="image/*" onchange="onChangeImage(event)">
 

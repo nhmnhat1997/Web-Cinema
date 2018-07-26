@@ -25,7 +25,7 @@
                     <ul class="nav navbar-nav nav-left">
                             <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
                                 <a href="/user/{{user._id}}">
-                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> Thông tin người dùng</a>
+                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> {{user.name}}</a>
                             </li>
                         </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -53,6 +53,22 @@
 
     <div ng-controller="showListController">
         <p class="hide" id="user-id"><%= userId %></p>
+        <div class="modal" tabindex="-1" role="dialog" id="LogoutDialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thông báo</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn đăng xuất ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="goSignOut()">OK</button>
+                            <button type="button" class="btn btn-primary" ng-click="cancelDialog()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
             <a ng-href="/phim/{{film._id}}">
                 <img ng-src="{{film.posterURL || '/images/image.jpeg'}}" class="img-responsive" alt="">

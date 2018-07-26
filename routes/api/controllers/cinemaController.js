@@ -30,6 +30,9 @@ async function createFilm (req, res, next) {
       await newFilm.save()
     } else {
       delete data.createdDate
+      if (!data.posterURL) {
+        delete data.posterURL
+      }
       console.log(data)
       await Film.findByIdAndUpdate(req.body._id, { $set: data })
     }
