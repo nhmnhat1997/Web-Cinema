@@ -37,6 +37,8 @@ router.get('/facebook/callback', function (req, res, next) {
     // if (req.session.user.role == constants.userRoleTypes.EventOwner) {
     //  return res.redirect('/user/' + req.session.user.shortLink + '?token=' + info.token);
     // }
+    console.log(req.session.user)
+    console.log(req.session.token)
     req.session.user = info.user
     req.session.token = info.token
     res.redirect('/')

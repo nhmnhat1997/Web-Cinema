@@ -38,40 +38,38 @@ function createPassportConfig (app) {
           token: token
         })
       })
-    },
-    passport.use(new FacebookStrategy({
-      clientID: '893876184132708',
-      clientSecret: '1250f3ec2316b80e5719aa2791ba657f',
-      callbackURL: "/auth/facebook/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-      console.log(profile)
-      User.findOne({ email: profile.emails[0].value }, async function(err, user) {
-        if (err) { return done(err); }
-        if (user){
-          var token = jwt.sign({ email: user.profile.emails[0].value }, config.secret, {
-            expiresIn: config.expireIn
-          })
-          return done(null, true, {
-            user: user,
-            token: token
-          })
+    }))
+  passport.use(new FacebookStrategy({
+    clientID: '893876184132708',
+    clientSecret: '1250f3ec2316b80e5719aa2791ba657f',
+    callbackURL: '/api/auth/facebook/callback'
+  },
+  function (accessToken, refreshToken, profile, done) {
+    console.log(profile)
+    User.findOne({ providerId: profile.id }, async function (err, user) {
+      if (err) { return done(err) }
+      if (user) {
+        var token = jwt.sign({ providerId: profile.id }, config.secret, {
+          expiresIn: config.expireIn
+        })
+        return done(null, true, {
+          user: user,
+          token: token
+        })
+      }
+      if (!user) {
+        let newUser = {
+          name: profile.displayName,
+          email: '',
+          providerId: profile.id,
+          avatarURL: '',
+          provider: 'facebook'
         }
-        if (!user){
-          let newUser = {
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            providerId: profile.id,
-            avatarURL: profile.photos ? profile.photos[0].value : '',
-            provider: 'facebook'
-          }
-          let dataReturn = await authController.signUpForSocial(newUser)
-          done(null, user, dataReturn);
-        }
-        
-      });
-    }
-  ));
+        let dataReturn = await authController.signUpForSocial(newUser)
+        done(null, user, dataReturn)
+      }
+    })
+  }
   ))
 
   passport.serializeUser(function (user, cb) {
