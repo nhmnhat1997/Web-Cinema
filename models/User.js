@@ -14,6 +14,18 @@ var UserSchema = new Schema({
   password: {
     type: String,
     default: ''
+  },
+  provider: {
+    type: String,
+    default: 'email'
+  },
+  providerId: {
+    type: String,
+    default: ''
+  },
+  avatarURL: {
+    type: String,
+    default: ''
   }
 }, { usePushEach: true })
 

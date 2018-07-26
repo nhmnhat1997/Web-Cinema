@@ -26,6 +26,23 @@ router.post('/signin', function (req, res, next) {
   })(req, res, next)
 })
 
+router.get('/facebook', passport.authenticate('facebook'))
+router.get('/facebook/callback', function (req, res, next) {
+  passport.authenticate('facebook', function (err, user, info) {
+    if (err) {
+      console.log(err)
+      return res.send({ errorMessage: err })
+    }
+    // req.session.user.isSocialLogging = true;
+    // if (req.session.user.role == constants.userRoleTypes.EventOwner) {
+    //  return res.redirect('/user/' + req.session.user.shortLink + '?token=' + info.token);
+    // }
+    req.session.user = info.user
+    req.session.token = info.token
+    res.redirect('/')
+  })(req, res, next)
+})
+
 router.get('/signout', function (req, res) {
   delete req.session.user
   delete req.session.token
