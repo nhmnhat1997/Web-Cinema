@@ -2,15 +2,30 @@
   const app = angular.module('Cinema-Web')
   app.controller('createController', ['$scope', 'apiService', function ($scope, apiService) {
     $scope.listGenreFilms = ['Hành động', 'Tình cảm', 'Kinh dị', 'Hoạt hình', 'Giả tưởng']
-    $scope.filmGenre = $scope.listGenreFilms[0]
-    $scope.filmName = ''
-    $scope.filmContent = ''
     $('#datePicker').datepicker({
       format: 'dd/mm/yyyy',
       todayHighlight: true,
       orientation: 'bottom auto',
       autoclose: true
     })
+    let filmId = $('#film-id').text().trim()
+    if (filmId) {
+      apiService.getFilm(filmId)
+        .then(function (response) {
+          console.log(response.message)
+          if (response.status == 200) {
+            console.log(response)
+            $scope.film = response.data.film
+            $scope.filmName = $scope.film.name
+            $scope.filmGenre = $scope.film.genre
+            $scope.filmContent = $scope.film.content
+            $('#datePicker').datepicker('setDate', new Date($scope.film.releaseDate))
+          }
+        })
+    }
+    $scope.filmGenre = $scope.listGenreFilms[0]
+    $scope.filmName = ''
+    $scope.filmContent = ''
     $('#datePicker').datepicker('setDate', new Date())
     console.log(timeStampToString($('#datePicker').datepicker('getDate')))
 
@@ -46,7 +61,7 @@
     }
 
     $scope.clickUploadFilm = function () {
-      if ($scope.filmName.length === 0) {
+      if (!$scope.filmName) {
         document.getElementById('filmName').setCustomValidity('Vui lòng nhập tên phim')
         return
       } else {
@@ -54,6 +69,7 @@
       }
       var date = new Date($('#datePicker').datepicker('getDate'))
       let data = {
+        _id: filmId,
         name: $scope.filmName,
         genre: $scope.filmGenre,
         releaseDate: date.getTime(),

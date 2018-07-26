@@ -3,16 +3,23 @@ const Film = mongoose.model('Film')
 
 async function createFilm (req, res, next) {
   try {
-    let newFilm = new Film({
+    let data = {
       name: req.body.name,
       genre: req.body.genre,
       releaseDate: req.body.releaseDate,
       content: req.body.content,
       creatorId: req.body.creatorId,
       createdDate: Date.now()
-    })
-    console.log(newFilm)
-    await newFilm.save()
+    }
+    if (!req.body._id) {
+      let newFilm = new Film(data)
+      console.log(newFilm)
+      await newFilm.save()
+    }
+    else{
+      data.createdDate = undefined
+      await Film.findByIdAndUpdate(req.body._id, {$set: data})
+    }
     res.send({ status: 200, message: 'Success' })
   } catch (error) {
     res.send({ status: 500, message: 'Error' })

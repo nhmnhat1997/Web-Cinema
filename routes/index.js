@@ -16,7 +16,11 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/phim/tao-phim', function (req, res, next) {
-  res.render('cinema/create', { title: 'Tạo phim', userId: req.session.user ? req.session.user._id : '' })
+  res.render('cinema/create', { title: 'Tạo phim', userId: req.session.user ? req.session.user._id : '', filmId: '' })
+})
+
+router.get('/phim/:id/sua-phim', function (req, res, next) {
+  res.render('cinema/create', { title: 'Tạo phim', userId: req.session.user ? req.session.user._id : '', filmId: req.params.id })
 })
 
 router.get('/dangky', function (req, res, next) {
