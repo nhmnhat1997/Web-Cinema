@@ -33,10 +33,6 @@ router.get('/facebook/callback', function (req, res, next) {
       console.log(err)
       return res.send({ errorMessage: err })
     }
-    // req.session.user.isSocialLogging = true;
-    // if (req.session.user.role == constants.userRoleTypes.EventOwner) {
-    //  return res.redirect('/user/' + req.session.user.shortLink + '?token=' + info.token);
-    // }
     console.log(req.session.user)
     console.log(req.session.token)
     req.session.user = info.user
