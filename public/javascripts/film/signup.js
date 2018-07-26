@@ -8,8 +8,7 @@
       if (!$scope.userName) {
         document.getElementById('userName').setCustomValidity('Vui lòng nhập tên của bạn')
         return
-      }
-      else {
+      } else {
         document.getElementById('userName').setCustomValidity('')
       }
       if (!$scope.email) {
@@ -18,29 +17,25 @@
       } else if (!COMMON.isEmailValid($scope.email)) {
         document.getElementById('email').setCustomValidity('Email không đúng định dạng')
         return
-      }
-      else {
+      } else {
         document.getElementById('email').setCustomValidity('')
       }
       if (!$scope.password) {
         document.getElementById('password').setCustomValidity('Vui lòng nhập mật khẩu')
         return
-      }
-      else {
+      } else {
         document.getElementById('password').setCustomValidity('')
       }
       if (!$scope.reEnterPassword) {
         document.getElementById('reEnterPassword').setCustomValidity('Vui lòng nhập mật khẩu lần 2')
         return
-      }
-      else {
+      } else {
         document.getElementById('reEnterPassword').setCustomValidity('')
       }
       if (!($scope.password === $scope.reEnterPassword)) {
         document.getElementById('reEnterPassword').setCustomValidity('2 mật khẩu không trùng khớp, vui lòng kiểm tra lại.')
         return
-      }
-      else {
+      } else {
         document.getElementById('reEnterPassword').setCustomValidity('')
       }
       $scope.goToLogin = function () {
@@ -63,8 +58,15 @@
           console.log(response.data.status)
           if (response.data.status == 200) {
             document.getElementById('SuccessDialog').style.display = 'block'
-          }
-          else if (response.data.status != 200) {
+            apiService.signin({email: data.email, password: data.password})
+              .then(function (response) {
+                console.log(response.message)
+                console.log(response.data.status)
+                if (response.data.status == 200) {
+                  window.location.href = '/'
+                }
+              })
+          } else if (response.data.status != 200) {
             $scope.error = response.data.errorMessage
             document.getElementById('ErrorDialog').style.display = 'block'
           }
