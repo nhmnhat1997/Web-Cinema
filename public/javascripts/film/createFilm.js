@@ -2,6 +2,7 @@ let imageFile
 const app = angular.module('Cinema-Web')
 app.controller('createController', ['$scope', 'apiService', function ($scope, apiService) {
   $scope.listGenreFilms = ['Hành động', 'Tình cảm', 'Kinh dị', 'Hoạt hình', 'Giả tưởng']
+  let userid = $('#user-id').text()
   $('#datePicker').datepicker({
     format: 'dd/mm/yyyy',
     todayHighlight: true,
@@ -25,6 +26,9 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
         console.log(response.message)
         if (response.status == 200) {
           console.log(response)
+          if (userid !== response.data.film.creatorId) {
+            window.location.href = '/'
+          }
           $scope.film = response.data.film
           $scope.filmName = $scope.film.name
           $scope.filmGenre = $scope.film.genre
@@ -37,8 +41,6 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
     filePicked = e.target.files[0]
     $('#imageFilm').css('opacity', 1)
   }, false)
-
-  let userid = $('#user-id').text()
   if (userid) {
     apiService.getUser(userid)
       .then(function (response) {
