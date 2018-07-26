@@ -61,7 +61,7 @@
                         <h5 class="modal-title">Thông báo</h5>
                     </div>
                     <div class="modal-body">
-                        <p>Tạo phim thành công.</p>
+                        <p>{{ notiMessage }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" ng-click="goBackHome()">OK</button>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="container my-container-center my-title-header">
-            <h1> Tạo phim mới </h1>
+            <h1> {{ formTitle }} </h1>
         </div>
 
         <div class="container my-create-film">
@@ -114,14 +114,10 @@
                 </div>
 
                 <div class="container my-container-right my-bot-form">
-                    <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickUploadFilm()" ng-hide="film._id" style="margin-right:15px">
+                    <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickUploadFilm()" style="margin-right:15px">
                         <i class="fa fa-upload fa-lg" aria-hidden="true"></i>
-                        Tạo phim
+                        {{ buttonTitle }}
                     </button>
-                    <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickUploadFilm()" ng-show="film._id" style="margin-right:15px">
-                            <i class="fa fa-upload fa-lg" aria-hidden="true"></i>
-                            Sửa phim
-                        </button>
                 </div>
             </form>
 

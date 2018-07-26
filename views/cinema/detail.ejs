@@ -97,6 +97,12 @@
                         <p id="content">{{ film.content }}</p>
                     </div>
                 </div>
+                <div class="container my-container-right my-bot-form">
+                        <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickEditFilm()" ng-show="isCreator" style="margin-right:15px">
+                            <i class="fa fa-edit fa-lg" aria-hidden="true"></i>
+                            Sửa
+                        </button>
+                    </div>
             </form>
 
         </div>

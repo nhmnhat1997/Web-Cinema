@@ -8,8 +8,18 @@
       orientation: 'bottom auto',
       autoclose: true
     })
+    $scope.formTitle = 'Tạo phim mới'
+    $scope.buttonTitle = 'Tạo phim'
+    $scope.filmGenre = $scope.listGenreFilms[0]
+    $scope.filmName = ''
+    $scope.filmContent = ''
+    $('#datePicker').datepicker('setDate', new Date())
+    console.log(timeStampToString($('#datePicker').datepicker('getDate')))
+
     let filmId = $('#film-id').text().trim()
     if (filmId) {
+      $scope.formTitle = 'Sửa phim'
+      $scope.buttonTitle = 'Sửa phim'
       apiService.getFilm(filmId)
         .then(function (response) {
           console.log(response.message)
@@ -23,12 +33,6 @@
           }
         })
     }
-    $scope.filmGenre = $scope.listGenreFilms[0]
-    $scope.filmName = ''
-    $scope.filmContent = ''
-    $('#datePicker').datepicker('setDate', new Date())
-    console.log(timeStampToString($('#datePicker').datepicker('getDate')))
-
     document.getElementById('fileInput').addEventListener('change', (e) => {
       filePicked = e.target.files[0]
       $('#imageFilm').css('opacity', 1)
@@ -53,7 +57,11 @@
     }
 
     $scope.goBackHome = function () {
-      window.location.href = '/'
+      if (filmId) {
+        window.location.href = '/phim/' + filmId
+      } else {
+        window.location.href = '/'
+      }
     }
 
     $scope.clickUploadImage = function () {
@@ -80,7 +88,13 @@
         .then(function (response) {
           console.log(response.message)
           if (response.status == 200) {
-            document.getElementById('SuccessDialog').style.display = 'block'
+            if (filmId) {
+              $scope.notiMessage = 'Sửa phim thành công'
+              document.getElementById('SuccessDialog').style.display = 'block'
+            } else {
+              $scope.notiMessage = 'Tạo phim thành công'
+              document.getElementById('SuccessDialog').style.display = 'block'
+            }
           }
         })
     }
