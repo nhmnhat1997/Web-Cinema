@@ -17,7 +17,8 @@ async function createFilm (req, res, next) {
       await newFilm.save()
     }
     else{
-      data.createdDate = undefined
+      delete data.createdDate
+      console.log(data)
       await Film.findByIdAndUpdate(req.body._id, {$set: data})
     }
     res.send({ status: 200, message: 'Success' })
