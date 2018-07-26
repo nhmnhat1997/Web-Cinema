@@ -73,7 +73,7 @@
         <div class="container my-create-film">
             <form role="form">
                 <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
-                    <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+                    <img id="imageFilm" name="imageFilm" ng-src= "{{film.posterURL || '/images/image.jpeg'}}">
                 </div>
 
                 <div class="container col-sm-12 col-md-7 my-form-film animated flipInX">

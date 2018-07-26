@@ -15,11 +15,11 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Trang chủ', userId: req.session.user ? req.session.user._id : '' })
 })
 
-router.get('/phim/tao-phim', function (req, res, next) {
+router.get('/phim/tao-phim', checkAuthentication,function (req, res, next) {
   res.render('cinema/create', { title: 'Tạo phim', userId: req.session.user ? req.session.user._id : '', filmId: '' })
 })
 
-router.get('/phim/:id/sua-phim', function (req, res, next) {
+router.get('/phim/:id/sua-phim', checkAuthentication, function (req, res, next) {
   res.render('cinema/create', { title: 'Tạo phim', userId: req.session.user ? req.session.user._id : '', filmId: req.params.id })
 })
 
@@ -31,7 +31,7 @@ router.get('/dangnhap', function (req, res, next) {
   res.render('cinema/signin', { title: 'Đăng nhập' })
 })
 
-router.get('/user/:id', function (req, res, next) {
+router.get('/user/:id', checkAuthentication, function (req, res, next) {
   res.render('cinema/profile', {title: 'Thông tin', userId: req.session.user ? req.session.user._id : ''})
 })
 
@@ -52,5 +52,14 @@ router.get('/users', function (req, res, next) {
 router.get('/signin', function (req, res, next) {
   res.render('signin', { title: 'Express' })
 })
+
+function checkAuthentication (req, res, next) {
+  if (req.session.user) { 
+    return next() 
+  } 
+  else { 
+    res.redirect('/') 
+  }
+}
 
 module.exports = router

@@ -1,28 +1,41 @@
 var mongoose = require('mongoose')
 const Film = mongoose.model('Film')
+const fs = require('fs')
+const path = require('path')
 
 async function createFilm (req, res, next) {
   try {
+    console.log(req.files)
+    let fileName
+    if (req.files) {
+      let file = req.files.file
+      fileName = Date.now() + file.name
+      await file.mv(path.join(__dirname, '../../../public/images/poster/') + fileName)
+    }
+    // if (err) throw err
     let data = {
       name: req.body.name,
       genre: req.body.genre,
       releaseDate: req.body.releaseDate,
       content: req.body.content,
       creatorId: req.body.creatorId,
-      createdDate: Date.now()
+      createdDate: Date.now(),
+      posterURL: fileName ? '/images/poster/' + fileName : ''
     }
+    console.log(data)
+
     if (!req.body._id) {
       let newFilm = new Film(data)
       console.log(newFilm)
       await newFilm.save()
-    }
-    else{
+    } else {
       delete data.createdDate
       console.log(data)
-      await Film.findByIdAndUpdate(req.body._id, {$set: data})
+      await Film.findByIdAndUpdate(req.body._id, { $set: data })
     }
     res.send({ status: 200, message: 'Success' })
   } catch (error) {
+    console.log(error)
     res.send({ status: 500, message: 'Error' })
   }
 }
