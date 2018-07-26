@@ -28,6 +28,12 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav nav-left">
+                            <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
+                                <a href="/user/{{user._id}}">
+                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> Thông tin người dùng</a>
+                            </li>
+                        </ul>
                     <ul class="nav navbar-nav navbar-right">
                             <li  ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
                                 <a>

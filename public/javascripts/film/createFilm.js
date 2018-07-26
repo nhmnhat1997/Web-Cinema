@@ -49,6 +49,8 @@
       if ($scope.filmName.length === 0) {
         document.getElementById('filmName').setCustomValidity('Vui lòng nhập tên phim')
         return
+      } else {
+        document.getElementById('filmName').setCustomValidity('')
       }
       var date = new Date($('#datePicker').datepicker('getDate'))
       let data = {

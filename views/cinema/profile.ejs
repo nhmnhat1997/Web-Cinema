@@ -16,7 +16,7 @@
     </div>
 
 
-    <nav class="navbar navbar-default navbar-custom" ng-controller="detailController">
+    <nav class="navbar navbar-default navbar-custom" ng-controller="profileController">
         <div class="container my-containter-full">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -28,24 +28,16 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav nav-left">
-                            <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
-                                <a href="/user/{{user._id}}">
-                                <i class="fa fa-user fa-lg" aria-hidden="true"></i> Thông tin người dùng</a>
-                            </li>
-                        </ul>
+                <ul class="nav navbar-nav nav-left">
+                    <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
+                        <a href="/user/{{user._id}}">
+                        <i class="fa fa-user fa-lg" aria-hidden="true"></i> Thông tin người dùng</a>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="user._id" ng-cloak>
                         <a href="/phim/tao-phim" >
                             <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
-                    </li>
-                    <li ng-show="!user._id" ng-cloak>
-                        <a href="/dangky" >
-                            <i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Đăng ký </a>
-                    </li>
-                    <li ng-show="!user._id" ng-cloak>
-                        <a href="/dangnhap">
-                            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Đăng nhập </a>
                     </li>
                     <li  ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
                         <a>
@@ -63,42 +55,31 @@
 
 
 
-    <div ng-controller="detailController">
-        <p class="hide" id="film-id"><%= filmId %></p>
+    <div ng-controller="profileController">
         <p class="hide" id="user-id"><%= userId %></p>
         <div class="container my-container-center my-title-header">
-            <h1> Chi tiết phim </h1>
+            <h1> Thông tin người dùng </h1>
         </div>
 
         <div class="container my-create-film">
             <form role="form">
                 <div class="container col-sm-12 col-md-5 my-upload-image text-center animated fadeIn">
-                    <img id="imageFilm" name="imageFilm" src="/images/image.jpeg">
+                    <img id="imageFilm" name="imageFilm" src="/images/avatar-user.png">
                 </div>
 
                 <div class="container col-sm-12 col-md-7 my-form-film animated flipInX">
                     <div class="form-group">
-                        <h4>Tên bộ phim:</h4>
-                        <p id="filmName">{{ film.name }}</p>
+                        <h4>Tên người dùng:</h4>
+                        <p id="userName">{{ user.name }}</p>
                     </div>
 
                     <div class="form-group">
-                        <h4>Thể loại phim:</h4>
-                        <p id="filmGenre">{{ film.genre }}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <h4> Thời gian phát hành: </h4>
-                        <p id="releaseDate">{{ film.releaseDate | date: 'dd/MM/yyyy'}}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <h4> Nội dung mô tả:</h4>
-                        <p id="content">{{ film.content }}</p>
+                        <h4>Email:</h4>
+                        <p id="email">{{ user.email }}</p>
                     </div>
                 </div>
             </form>
 
         </div>
     </div>
-    <script src="/javascripts/film/detail.js"></script>
+    <script src="/javascripts/film/profile.js"></script>
