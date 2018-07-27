@@ -31,17 +31,17 @@
                 <ul class="nav navbar-nav nav-left">
                     <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
                         <a href="/user/{{user._id}}">
-                        <i class="fa fa-user fa-lg" aria-hidden="true"></i> {{user.name}}</a>
+                            <i class="fa fa-user fa-lg" aria-hidden="true"></i> <span id="headerUserName">{{user.name}}</span></a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="user._id" ng-cloak>
-                        <a href="/phim/tao-phim" >
+                        <a href="/phim/tao-phim">
                             <i class="fa fa-upload fa-lg" aria-hidden="true"></i> Tạo phim mới </a>
                     </li>
-                    <li  ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
+                    <li ng-show="user._id" ng-click="clickSignOut()" style="cursor: pointer" ng-cloak>
                         <a>
-                        <i class="fa fa-power-off fa-lg" aria-hidden="true"></i> Đăng xuất </a>
+                            <i class="fa fa-power-off fa-lg" aria-hidden="true"></i> Đăng xuất </a>
                     </li>
                 </ul>
             </div>
@@ -58,21 +58,78 @@
     <div ng-controller="profileController">
         <p class="hide" id="user-id"><%= userId %></p>
         <div class="modal" tabindex="-1" role="dialog" id="LogoutDialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thông báo</h5>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn đăng xuất ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="goSignOut()">OK</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancelDialog()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="EditNameDialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container col-sm-12 col-md-12 my-form-film animated flipInX">
+                            <div class="form-group">
+                                <h4>Nhập tên:</h4>
+                                <input class="form-control my-input-film" type="text" id="newName" ng-model="newName">
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn đăng xuất ?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" ng-click="goSignOut()">OK</button>
+                        <div class="modal-footer no-border-top">
+                            <button type="button" class="btn btn-primary" ng-click="changeInfo()">OK</button>
                             <button type="button" class="btn btn-primary" ng-click="cancelDialog()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="ChangePasswordDialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container col-sm-12 col-md-12 my-form-film animated flipInX">
+                            <div class="form-group">
+                                <h4>Mật khẩu hiện tại:</h4>
+                                <input class="form-control my-input-film" type="password" id="currentPass" ng-model="currentPass">
+                                <h4>Mật khẩu mới:</h4>
+                                <input class="form-control my-input-film" type="password" id="newPass" ng-model="newPass">
+                                <h4>Nhập lại mật khẩu mới:</h4>
+                                <input class="form-control my-input-film" type="password" id="reenterNewPass" ng-model="reenterNewPass">
+                            </div>
+                        </div>
+                        <div class="modal-footer no-border-top">
+                            <button type="button" class="btn btn-primary" ng-click="changePassword()">OK</button>
+                            <button type="button" class="btn btn-primary" ng-click="cancelDialog()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="ErrorDialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="errorNoti">{{ error }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="cancelDialog()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container my-container-center my-title-header">
             <h1> Thông tin người dùng </h1>
         </div>
@@ -80,18 +137,33 @@
         <div class="container my-create-film">
             <form role="form">
                 <div class="container col-sm-12 col-md-5 my-upload-profile text-center animated fadeIn">
-                    <img id="imageFilm" name="imageFilm" src="/images/avatar-user.png">
+                    <img id="imageFilm" name="imageFilm" ng-src="{{ user.avatarURL || '/images/avatar-user.png' }}">
+                    <input type="file" style="display:none" id="fileInput" name="fileInput" accept="image/*" onchange="onChangeImage(event)">
+                    <div class="container-fluid my-container-center my-bot-form">
+                        <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="clickUploadAvatar()" ng-show="user.provider === 'email'">
+                            <i class="fa fa-edit fa-lg" aria-hidden="true"></i>&nbsp;Đổi Avatar</button>
+                    </div>
                 </div>
 
                 <div class="container col-sm-12 col-md-7 my-form-film animated flipInX">
                     <div class="form-group">
                         <h4>Tên người dùng:</h4>
-                        <p id="userName">{{ user.name }}</p>
+                        <div class="container-fluid no-padding">
+                            <div class="col-xs-10 no-padding">
+                                <p id="userName">{{ user.name }}</p>
+                            </div>
+                            <div class="col-xs-2 no-padding" style="cursor: pointer;" ng-click="openEditDialog()" ng-show="user.provider === 'email'">
+                                <i class="fa fa-edit fa-lg" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="form-group">
                         <h4>Email:</h4>
                         <p id="email">{{ user.email }}</p>
+                    </div>
+                    <div class="container-fluid my-container-center my-bot-form">
+                        <button type="submit" class="btn btn-primary my-btn text-center animated slideInUp" ng-click="openChangePassDialog()" ng-show="user.provider === 'email'">
+                            <i class="fa fa-edit fa-lg" aria-hidden="true"></i>&nbsp;Đổi mật khẩu</button>
                     </div>
                 </div>
             </form>

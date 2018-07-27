@@ -125,20 +125,6 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
         err && console.log(err)
       }
     })
-
-    /* apiService.createFilm(data)
-      .then(function (response) {
-        console.log(response.message)
-        if (response.status == 200) {
-          if (filmId) {
-            $scope.notiMessage = 'Sửa phim thành công'
-            document.getElementById('SuccessDialog').style.display = 'block'
-          } else {
-            $scope.notiMessage = 'Tạo phim thành công'
-            document.getElementById('SuccessDialog').style.display = 'block'
-          }
-        }
-      }) */
   }
 }])
 

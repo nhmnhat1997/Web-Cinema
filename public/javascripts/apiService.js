@@ -23,6 +23,12 @@ angular.module('Cinema-Web', []).factory('apiService', ['$http', function ($http
     },
     signout: function () {
       return $http.get('/api/auth/signout')
+    },
+    editInfo: function (id, data) {
+      return $http.put('/api/user/' + id, data)
+    },
+    changePassword: function (id, data) {
+      return $http.put('/api/user/' + id + '/change-password', data)
     }
   }
 }])
