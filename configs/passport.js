@@ -43,8 +43,8 @@ function createPassportConfig (app) {
   passport.use(new FacebookStrategy({
     clientID: '893876184132708',
     clientSecret: '1250f3ec2316b80e5719aa2791ba657f',
-    callbackURL: 'https://cinema-web-training.herokuapp.com/api/auth/facebook/callback',
-    profileFields: ['displayName', 'email', 'picture.type(large)']
+    callbackURL: 'https://cinema-web-training.herokuapp.com/api/auth/facebook/callback'
+    // profileFields: ['displayName', 'email', 'picture.type(large)']
   },
   function (accessToken, refreshToken, profile, done) {
     console.log(profile)
