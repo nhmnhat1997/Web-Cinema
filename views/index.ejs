@@ -23,6 +23,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav nav-left">
+                            <li class="li-icon">
+                                    <a href="" ng-click="toggleInputSearch()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="li-input-search"  ng-cloak>
+                                    <input type="text" class="form-control input-search" id="input-search" placeholder="Nhập từ khóa tìm kiếm ..." ng-model="search">
+                                </li>
                             <li class="ng-binding ng-show" ng-show="user._id" ng-cloak>
                                 <a href="/user/{{user._id}}">
                                 <i class="fa fa-user fa-lg" aria-hidden="true"></i> {{user.name}}</a>
@@ -69,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate'">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 my-portfolio-item animated fadeInUp" ng-repeat="film in listFilms | orderBy: '-createdDate' | filmFilter ">
             <a ng-href="/phim/{{film._id}}">
                 <img ng-src="{{film.posterURL || '/images/image.jpeg'}}" class="img-responsive" alt="">
                 <div class="detail">
