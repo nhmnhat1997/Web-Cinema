@@ -10,6 +10,7 @@ var responseStatus = require('./responseStatus')
 const authController = require('../routes/api/controllers/authController')
 var LocalStrategy = require('passport-local').Strategy
 var FacebookStrategy = require('passport-facebook').Strategy
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 function createPassportConfig (app) {
   passport.use(new LocalStrategy(
@@ -42,7 +43,8 @@ function createPassportConfig (app) {
   passport.use(new FacebookStrategy({
     clientID: '893876184132708',
     clientSecret: '1250f3ec2316b80e5719aa2791ba657f',
-    callbackURL: 'https://cinema-web-training.herokuapp.com/api/auth/facebook/callback'
+    callbackURL: 'https://cinema-web-training.herokuapp.com/api/auth/facebook/callback',
+    profileFields: ['displayName', 'email', 'picture.type(large)']
   },
   function (accessToken, refreshToken, profile, done) {
     console.log(profile)
@@ -60,7 +62,7 @@ function createPassportConfig (app) {
       if (!user) {
         let newUser = {
           name: profile.displayName,
-          email: '',
+          email: profile.emails[0].value,
           providerId: profile.id,
           avatarURL: '',
           provider: 'facebook'
@@ -70,6 +72,40 @@ function createPassportConfig (app) {
       }
     })
   }
+  ))
+
+  passport.use(new GoogleStrategy(
+    {
+      clientID: '699972729999-6bjof61q477vviql3avqr7cbra84ruus.apps.googleusercontent.com',
+      clientSecret: 'A2s5FMJX0HHVLzgGzlRG12wh',
+      callbackURL: 'https://cinema-web-training.herokuapp.com/api/auth/google/callback'
+    },
+    function (req, accessToken, refreshToken, profile, done) {
+      console.log(profile)
+      User.findOne({ providerId: profile.id }, async function (err, user) {
+        if (err) { return done(err) }
+        if (user) {
+          var token = jwt.sign({ providerId: profile.id }, config.secret, {
+            expiresIn: config.expireIn
+          })
+          return done(null, true, {
+            user: user,
+            token: token
+          })
+        }
+        if (!user) {
+          let newUser = {
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            providerId: profile.id,
+            avatarURL: '',
+            provider: 'google'
+          }
+          let dataReturn = await authController.signUpForSocial(newUser)
+          done(null, user, dataReturn)
+        }
+      })
+    }
   ))
 
   passport.serializeUser(function (user, cb) {

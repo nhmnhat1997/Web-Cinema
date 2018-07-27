@@ -41,6 +41,23 @@ router.get('/facebook/callback', function (req, res, next) {
   })(req, res, next)
 })
 
+router.get('/google', passport.authenticate('google', { scope:
+  [ 'https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/plus.profile.emails.read' ] }))
+router.get('/google/callback', function (req, res, next) {
+  passport.authenticate('google', function (err, user, info) {
+    if (err) {
+      console.log(err)
+      return res.send({ errorMessage: err })
+    }
+    console.log(info.user)
+    console.log(info.token)
+    req.session.user = info.user
+    req.session.token = info.token
+    res.redirect('/')
+  })(req, res, next)
+})
+
 router.get('/signout', function (req, res) {
   delete req.session.user
   delete req.session.token

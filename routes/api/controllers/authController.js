@@ -4,7 +4,7 @@ const responseStatus = require('../../../configs/responseStatus')
 var jwt = require('jsonwebtoken')
 const User = mongoose.model('User')
 
-async function signUp(req, res, next) {
+async function signUp (req, res, next) {
   try {
     let userData = req.body
     console.log(userData)
@@ -36,13 +36,15 @@ async function signUp(req, res, next) {
   }
 }
 
-async function signUpForSocial(newUser) {
+async function signUpForSocial (newUser) {
   try {
     let user = new User(newUser)
     user = await user.save()
-    const token = jwt.sign(user.email, config.secret, {
+    console.log(user)
+    const token = jwt.sign({email: user.email}, config.secret, {
       expiresIn: config.expireIn
     })
+    console.log(token)
     return (responseStatus.Code200({ user: user, token: token }))
   } catch (error) {
     console.log(error)
@@ -50,7 +52,7 @@ async function signUpForSocial(newUser) {
   }
 }
 
-function isEmailValid(email) {
+function isEmailValid (email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
 }
