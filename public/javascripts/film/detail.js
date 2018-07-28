@@ -33,7 +33,7 @@
         if (response.status == 200) {
           console.log(response)
           $scope.film = response.data.film
-          if (userid === $scope.film.creatorId) {
+          if (userid === $scope.film.creatorId && userid) {
             $scope.isCreator = true
           }
         }

@@ -45,18 +45,13 @@ router.get('/phim/:id', async function (req, res, next) {
   }
 })
 
-router.get('/users', function (req, res, next) {
-  res.send('respond with a resource')
-})
-
-router.get('/signin', function (req, res, next) {
-  res.render('signin', { title: 'Express' })
-})
-
 function checkAuthentication (req, res, next) {
   if (req.session.user) { 
     return next() 
-  } 
+  }
+  if (req.headers['x-access-token']) {
+    return next()
+  }
   else { 
     res.redirect('/') 
   }

@@ -1,25 +1,24 @@
 (() => {
   const app = angular.module('Cinema-Web')
   var vietnameseToAlias = function (alias) {
-    if (alias == null) return null;
-    var str = alias;
-    str = str.toLowerCase();
-    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
-    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
-    str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
-    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
-    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
-    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
-    str = str.replace(/đ/g, 'd');
-    return str;
-};
+    if (alias == null) return null
+    var str = alias
+    str = str.toLowerCase()
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e')
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i')
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o')
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u')
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y')
+    str = str.replace(/đ/g, 'd')
+    return str
+  }
   app.filter('filmFilter', function () {
     return function (items) {
       console.log(items)
-      if (!items)
-        return []
+      if (!items) { return [] }
       let result = items.filter(function (element, index, array) {
-        return vietnameseToAlias(element.name).includes(vietnameseToAlias($('#input-search').val())) || 
+        return vietnameseToAlias(element.name).includes(vietnameseToAlias($('#input-search').val())) ||
         vietnameseToAlias(element.genre).includes(vietnameseToAlias($('#input-search').val())) ||
         vietnameseToAlias(element.content).includes(vietnameseToAlias($('#input-search').val())) ||
         COMMON.timeStampToString(element.releaseDate).includes(vietnameseToAlias($('#input-search').val()))
