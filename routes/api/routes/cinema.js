@@ -26,8 +26,8 @@ function checkAuthentication (req, res, next) {
         res.status(error.status).send(error)
         console.log(error)
       })
-  }
-  if (req.session.user) {
+  } 
+  else if (req.session.user) {
     return next()
   } else {
     res.status(401).send(responseStatus.Code401({ errorMessage: responseStatus.INVALID_REQUEST }))
