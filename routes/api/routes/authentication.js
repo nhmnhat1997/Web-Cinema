@@ -11,7 +11,7 @@ router.post('/signin', function (req, res, next) {
     console.log(err, user, info)
     if (err) return res.status(err.status).send(err)
     if (!user) {
-      return res.status(401).send(responseStatus.Code401({ errorMessage: responseStatus.WRONG_EMAIL_OR_PASSWORD }))
+      return res.send(responseStatus.Code401({ errorMessage: responseStatus.WRONG_EMAIL_OR_PASSWORD }))
     }
     req.logIn(user, async function (err) {
       if (err) { return next(err) }
