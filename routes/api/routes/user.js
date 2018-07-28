@@ -1,16 +1,17 @@
 var express = require('express')
 var router = express.Router()
 const userController = require('../controllers/userController')
+var responseStatus = require('../../../configs/responseStatus')
 const fileUpload = require('express-fileupload')
 
 router.use(fileUpload())
 router.get('/:id', userController.getUser)
 
-router.put('/:id', userController.editInfo)
+router.put('/:id', checkAuthentication, userController.editInfo)
 
-router.put('/:id/change-password', userController.changePassword)
+router.put('/:id/change-password', checkAuthentication, userController.changePassword)
 
-router.put('/:id/change-avatar', userController.changeAvatar)
+router.put('/:id/change-avatar', checkAuthentication, userController.changeAvatar)
 
 function checkAuthentication (req, res, next) {
   if (req.headers['x-access-token']) {
@@ -23,11 +24,10 @@ function checkAuthentication (req, res, next) {
         res.status(error.status).send(error)
         console.log(error)
       })
-  }
-  if (req.session.user) {
+  } else if (req.session.user) {
     return next()
   } else {
-    res.redirect('/')
+    res.status(401).send(responseStatus.Code401({ errorMessage: responseStatus.INVALID_REQUEST }))
   }
 }
 

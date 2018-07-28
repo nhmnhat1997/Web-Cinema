@@ -39,6 +39,7 @@
       console.log(data)
       apiService.signin(data)
         .then(function (response) {
+          console.log(response)
           console.log(response.message)
           console.log(response.data.status)
           if (response.data.status == 200) {

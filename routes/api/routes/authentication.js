@@ -9,7 +9,7 @@ router.post('/signup', authController.signUp)
 router.post('/signin', function (req, res, next) {
   passport.authenticate('local', async (err, user, info) => {
     console.log(err, user, info)
-    if (err) return res.status(500).send(err)
+    if (err) return res.status(err.status).send(err)
     if (!user) {
       return res.status(401).send(responseStatus.Code401({ errorMessage: responseStatus.WRONG_EMAIL_OR_PASSWORD }))
     }
