@@ -39,7 +39,7 @@ async function createFilm (req, res, next) {
     res.send({ status: 200, message: 'Success' })
   } catch (error) {
     console.log(error)
-    res.send({ status: 500, message: 'Error' })
+    res.status(500).send({ status: 500, message: error })
   }
 }
 
