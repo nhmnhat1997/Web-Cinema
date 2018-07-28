@@ -36,21 +36,16 @@
         email: $scope.email,
         password: $scope.password
       }
-      console.log(data)
+    
       apiService.signin(data)
         .then(function (response) {
-          console.log(response)
-          console.log(response.message)
-          console.log(response.data.status)
           if (response.data.status == 200) {
             window.location.href = '/'
           } else if (response.data.status != 200) {
-            console.log(response.data.errorMessage)
             $scope.error = response.data.errorMessage
             document.getElementById('ErrorDialog').style.display = 'block'
           }
         }).catch(function (err) {
-          console.log(err)
           $scope.error = err.data.errorMessage
           document.getElementById('ErrorDialog').style.display = 'block'
         })

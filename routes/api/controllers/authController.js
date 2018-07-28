@@ -7,10 +7,8 @@ const User = mongoose.model('User')
 async function signUp (req, res, next) {
   try {
     let userData = req.body
-    console.log(userData)
     var email = userData.email
     let user = await User.findOne({ email: email })
-    console.log(user)
     if (user) {
       throw (responseStatus.Code409({
         errorMessage: responseStatus.EXIST_EMAIL
@@ -31,7 +29,6 @@ async function signUp (req, res, next) {
     })
     res.send(responseStatus.Code200({ user: user, token: token }))
   } catch (error) {
-    console.log(error)
     res.send(error)
   }
 }
@@ -40,14 +37,11 @@ async function signUpForSocial (newUser) {
   try {
     let user = new User(newUser)
     user = await user.save()
-    console.log(user)
     const token = jwt.sign({providerId: user.providerId}, config.secret, {
       expiresIn: config.expireIn
     })
-    console.log(token)
     return (responseStatus.Code200({ user: user, token: token }))
   } catch (error) {
-    console.log(error)
     return (error)
   }
 }

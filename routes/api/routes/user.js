@@ -1,7 +1,11 @@
 var express = require('express')
 var router = express.Router()
 const userController = require('../controllers/userController')
-var responseStatus = require('../../../configs/responseStatus')
+var mongoose = require('mongoose')
+const config = require('../../../configs/config')
+const responseStatus = require('../../../configs/responseStatus')
+var jwt = require('jsonwebtoken')
+const User = mongoose.model('User')
 const fileUpload = require('express-fileupload')
 
 router.use(fileUpload())
@@ -17,12 +21,10 @@ function checkAuthentication (req, res, next) {
   if (req.headers['x-access-token']) {
     isLogined(req.headers['x-access-token'])
       .then(() => {
-        console.log(req.headers['x-access-token'])
         return next()
       })
       .catch(error => {
         res.status(error.status).send(error)
-        console.log(error)
       })
   } else if (req.session.user) {
     return next()
@@ -40,7 +42,6 @@ async function isLogined (token) {
       if (!decoded || !decoded.email) {
         return reject(responseStatus.Code401({ errorMessage: responseStatus.INVALID_REQUEST }))
       }
-      console.log(decoded)
       const email = decoded.email
       User.findOne({ email: email }).exec((err, user) => {
         if (err) {
