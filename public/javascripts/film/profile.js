@@ -110,21 +110,18 @@ function onChangeImage (event) {
   var getImagePath = URL.createObjectURL(event.target.files[0])
   $('#imageFilm').attr('src', getImagePath)
   imageFile = selectedFile
-  console.log(imageFile)
   beginUpload(currentId)
 }
 function beginUpload (userid) {
   if (!imageFile) { return }
   var formData = new FormData()
   formData.append('file', imageFile)
-  console.log(imageFile)
   $.ajax('/api/user/' + userid + '/change-avatar', {
     method: 'PUT',
     data: formData,
     processData: false,
     contentType: false,
     success: function (data) {
-      console.log(data)
       alert('Đổi avatar thành công')
     },
     error: function (err) {

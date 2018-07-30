@@ -11,7 +11,6 @@
     $scope.goSignOut = function () {
       apiService.signout()
         .then(function (response) {
-          console.log(response.data)
           window.location.href = '/'
         })
     }
@@ -24,14 +23,11 @@
         .then(function (response) {
           $scope.user = response.data.user
           // $('.loading').hide()
-          console.log(response.data)
         })
     }
     apiService.getFilm(id)
       .then(function (response) {
-        console.log(response.message)
         if (response.status == 200) {
-          console.log(response)
           $scope.film = response.data.film
           if (userid === $scope.film.creatorId && userid) {
             $scope.isCreator = true

@@ -19,12 +19,10 @@ function checkAuthentication (req, res, next) {
   if (req.headers['x-access-token']) {
     isLogined(req.headers['x-access-token'])
       .then(() => {
-        console.log(req.headers['x-access-token'])
         return next()
       })
       .catch(error => {
         res.status(error.status).send(error)
-        console.log(error)
       })
   } 
   else if (req.session.user) {
@@ -43,7 +41,6 @@ async function isLogined (token) {
       if (!decoded || !decoded.email) {
         return reject(responseStatus.Code401({ errorMessage: responseStatus.INVALID_REQUEST }))
       }
-      console.log(decoded)
       const email = decoded.email
       User.findOne({ email: email }).exec((err, user) => {
         if (err) {

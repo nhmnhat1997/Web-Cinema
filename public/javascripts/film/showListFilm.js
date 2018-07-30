@@ -15,7 +15,6 @@
   }
   app.filter('filmFilter', function () {
     return function (items) {
-      console.log(items)
       if (!items) { return [] }
       let result = items.filter(function (element, index, array) {
         return vietnameseToAlias(element.name).includes(vietnameseToAlias($('#input-search').val())) ||
@@ -37,7 +36,6 @@
     $scope.goSignOut = function () {
       apiService.signout()
         .then(function (response) {
-          console.log(response.data)
           window.location.href = '/'
         })
     }
@@ -53,12 +51,10 @@
       apiService.getUser(userid)
         .then(function (response) {
           $scope.user = response.data.user
-          console.log(response.data)
         })
     }
     apiService.getFilms()
       .then(function (response) {
-        console.log(response)
         $scope.listFilms = response.data.films
       })
   }])

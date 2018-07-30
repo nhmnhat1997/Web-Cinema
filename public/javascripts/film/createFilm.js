@@ -15,7 +15,6 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
   $scope.filmName = ''
   $scope.filmContent = ''
   $('#datePicker').datepicker('setDate', new Date())
-  console.log(timeStampToString($('#datePicker').datepicker('getDate')))
 
   let filmId = $('#film-id').text().trim()
   if (filmId) {
@@ -23,9 +22,7 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
     $scope.buttonTitle = 'Sửa phim'
     apiService.getFilm(filmId)
       .then(function (response) {
-        console.log(response.message)
         if (response.status == 200) {
-          console.log(response)
           if (userid !== response.data.film.creatorId) {
             window.location.href = '/'
           }
@@ -46,7 +43,6 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
       .then(function (response) {
         $scope.user = response.data.user
         // $('.loading').hide()
-        console.log(response.data)
       })
   }
 
@@ -57,7 +53,6 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
   $scope.goSignOut = function () {
     apiService.signout()
       .then(function (response) {
-        console.log(response.data)
         window.location.href = '/'
       })
   }
