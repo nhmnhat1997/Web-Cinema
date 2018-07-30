@@ -3,6 +3,7 @@ let currentId
 (() => {
   const app = angular.module('Cinema-Web')
   app.controller('profileController', ['$scope', 'apiService', function ($scope, apiService) {
+    $('.loader').fadeIn(500)
     let userid = $('#user-id').text()
     $scope.clickSignOut = function () {
       document.getElementById('LogoutDialog').style.display = 'block'
@@ -100,6 +101,7 @@ let currentId
       apiService.getUser(userid)
         .then(function (response) {
           $scope.user = response.data.user
+          $('.loader').fadeOut(500)
           console.log(response.data)
         })
     }

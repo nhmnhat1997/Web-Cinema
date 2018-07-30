@@ -27,6 +27,7 @@
     }
   })
   app.controller('showListController', ['$scope', 'apiService', function ($scope, apiService) {
+    $('.loader').fadeIn(500)
     let userid = $('#user-id').text()
     $scope.resultList = []
     $scope.clickSignOut = function () {
@@ -56,6 +57,7 @@
     apiService.getFilms()
       .then(function (response) {
         $scope.listFilms = response.data.films
+        $('.loader').fadeOut(500)
       })
   }])
 })()

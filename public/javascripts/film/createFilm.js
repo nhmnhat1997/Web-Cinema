@@ -1,6 +1,7 @@
 let imageFile
 const app = angular.module('Cinema-Web')
 app.controller('createController', ['$scope', 'apiService', function ($scope, apiService) {
+  $('.loader').fadeIn(500)
   $scope.listGenreFilms = ['Hành động', 'Tình cảm', 'Kinh dị', 'Hoạt hình', 'Giả tưởng']
   let userid = $('#user-id').text()
   $('#datePicker').datepicker({
@@ -31,6 +32,7 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
           $scope.filmGenre = $scope.film.genre
           $scope.filmContent = $scope.film.content
           $('#datePicker').datepicker('setDate', new Date($scope.film.releaseDate))
+          $('.loader').fadeOut(500)
         }
       })
   }
@@ -42,7 +44,7 @@ app.controller('createController', ['$scope', 'apiService', function ($scope, ap
     apiService.getUser(userid)
       .then(function (response) {
         $scope.user = response.data.user
-        // $('.loading').hide()
+        $('.loader').fadeOut(500)
       })
   }
 

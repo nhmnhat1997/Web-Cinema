@@ -1,9 +1,11 @@
 (() => {
   const app = angular.module('Cinema-Web')
   app.controller('signupController', ['$scope', 'apiService', function ($scope, apiService) {
+    $('.loader').fadeIn(500)
     $scope.userName = ''
     $scope.email = ''
     $scope.password = ''
+    $('.loader').fadeOut(500)
     $scope.clickSignUp = function () {
       if (!$scope.userName) {
         document.getElementById('userName').setCustomValidity('Vui lòng nhập tên của bạn')

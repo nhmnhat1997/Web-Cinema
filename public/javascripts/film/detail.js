@@ -1,6 +1,7 @@
 (() => {
   const app = angular.module('Cinema-Web')
   app.controller('detailController', ['$scope', 'apiService', function ($scope, apiService) {
+    $('.loader').fadeIn(500)
     let id = $('#film-id').text()
     let userid = $('#user-id').text()
     $scope.isCreator = false
@@ -32,6 +33,7 @@
           if (userid === $scope.film.creatorId && userid) {
             $scope.isCreator = true
           }
+          $('.loader').fadeOut(500)
         }
       })
     $scope.clickEditFilm = function () {
