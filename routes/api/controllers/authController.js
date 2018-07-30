@@ -65,7 +65,7 @@ async function sendResetPasswordMail (req, res, next) {
         pass: 'doremon123451986'
       }
     })
-    var content = ejs.render('<body style="font-family: Arial; font-size: 12px;"><div><p>Mật khẩu của bạn đã được đặt lại.</p><p>Mật khẩu mới của bạn là.</p><h2><%= newPass%></h2></div></body>', {newPass: newPass})
+    var content = ejs.render('<body style="font-family: Arial; font-size: 12px;"><div><p>Mật khẩu của bạn đã được đặt lại.</p><p>Mật khẩu mới của bạn là.</p><h2><%=newPass%></h2></div></body>', {newPass: newPass})
     var mailOptions = {
       to: req.body.email,
       from: 'support@cinema.com',
@@ -74,6 +74,7 @@ async function sendResetPasswordMail (req, res, next) {
     }
     smtpTransport.sendMail(mailOptions, function (err) {
       if (err) { throw err }
+      res.send(responseStatus.Code200({message: 'Reset mật khẩu thành công.'}))
     })
   } catch (error) {
     return error
